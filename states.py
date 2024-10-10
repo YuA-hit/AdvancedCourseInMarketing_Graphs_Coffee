@@ -91,7 +91,7 @@ plt.ylabel("States", fontsize=14)
 plt.tight_layout()
 plt.show()
 
-# Heatmap
+# バカデカいHeatmap
 correlation = df[["Marketing", "Profit", "Sales", "Total_expenses"]].corr()
 
 plt.figure(figsize=(10, 8))
@@ -103,15 +103,12 @@ plt.show()
 
 columns_of_interest = ["Marketing", "Profit", "Sales", "Total_expenses"]
 
-# サブプロットのグリッドサイズを計算
 n_states = len(states)
 n_cols = 5  # 1行に表示する州の数を増やす
 n_rows = (n_states - 1) // n_cols + 1
 
-# 図のサイズを小さくする
 fig, axes = plt.subplots(n_rows, n_cols, figsize=(3 * n_cols, 3 * n_rows))
 
-# 各州ごとにヒートマップを作成
 for i, state in enumerate(states):
     state_data = df[df["State"] == state]
     correlation = state_data[columns_of_interest].corr()
@@ -126,13 +123,11 @@ for i, state in enumerate(states):
         vmax=1,
         center=0,
         ax=axes[row, col],
-        annot_kws={"size": 6},  # アノテーションのフォントサイズを小さくする
-        cbar=False,  # カラーバーを非表示にする
+        annot_kws={"size": 6},
+        cbar=False,
     )
 
-    axes[row, col].set_title(
-        f"{state}", fontsize=8
-    )  # タイトルのフォントサイズを小さくする
+    axes[row, col].set_title(f"{state}", fontsize=8)
     axes[row, col].set_xticklabels(
         axes[row, col].get_xticklabels(), rotation=45, ha="right", fontsize=4
     )
@@ -140,7 +135,6 @@ for i, state in enumerate(states):
         axes[row, col].get_yticklabels(), rotation=0, fontsize=6
     )
 
-# 使用しないサブプロットを非表示にする
 for j in range(i + 1, n_rows * n_cols):
     row = j // n_cols
     col = j % n_cols
