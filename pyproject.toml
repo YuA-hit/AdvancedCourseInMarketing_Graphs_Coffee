@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "coffee-graphs"
+version = "0.1.0"
+description = ""
+authors = ["YuA-hit <1122001m@g.hit-u.ac.jp>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "^2.2.3"
+matplotlib = "^3.9.2"
+seaborn = "^0.13.2"
+scipy = "^1.14.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
