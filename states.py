@@ -58,15 +58,15 @@ for state in states:
     state_data = df[df["State"] == state]
     plt.scatter(
         state_data["Marketing"],
-        state_data["Profit"],
+        state_data["Sales"],
         color=color_dict[state],
         label=state,
         alpha=0.8,
     )
 
 plt.xlabel("Marketing", fontsize=16)
-plt.ylabel("Profit", fontsize=16)
-plt.title("Profit vs Marketing by State", fontsize=18)
+plt.ylabel("Sales", fontsize=16)
+plt.title("Sales vs Marketing by State", fontsize=18)
 
 plt.legend(bbox_to_anchor=(1.05, 1), loc="upper left", fontsize=12)
 
@@ -80,11 +80,11 @@ plt.show()
 
 # Average Heatmap
 
-state_avg = df.groupby("State")[["Marketing", "Profit"]].mean()
+state_avg = df.groupby("State")[["Marketing", "Sales"]].mean()
 
 plt.figure(figsize=(12, 10))
 sns.heatmap(state_avg, annot=True, cmap="YlOrRd", fmt=".2f")
-plt.title("Average Marketing and Profit by State", fontsize=18)
+plt.title("Average Marketing and Sales by State", fontsize=18)
 plt.xlabel("Metrics", fontsize=14)
 plt.ylabel("States", fontsize=14)
 
