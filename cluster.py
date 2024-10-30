@@ -51,20 +51,56 @@ for var in categorical_vars:
 # Cluster visualization
 plt.figure(figsize=(12, 8))
 scatter = plt.scatter(df["Marketing"], df["Sales"], c=df["Cluster"], cmap="viridis")
+
+# Overall regression line
+slope, intercept, r_value, p_value, std_err = stats.linregress(
+    df["Marketing"], df["Sales"]
+)
+line = slope * df["Marketing"] + intercept
+plt.plot(
+    df["Marketing"],
+    line,
+    color="black",
+    linestyle="--",
+    label=f"Overall: R² = {r_value**2:.3f}",
+)
+
+# Regression lines for each cluster
+colors = ["purple", "blue", "green", "yellow"]
+legend_elements = scatter.legend_elements()[0]
+legend_labels = ["Cluster 0", "Cluster 1", "Cluster 2", "Cluster 3"]
+
+for i in range(4):
+    cluster_data = df[df["Cluster"] == i]
+    slope, intercept, r_value, p_value, std_err = stats.linregress(
+        cluster_data["Marketing"], cluster_data["Sales"]
+    )
+    line = slope * cluster_data["Marketing"] + intercept
+    plt.plot(
+        cluster_data["Marketing"],
+        line,
+        color=colors[i],
+        linestyle=":",
+        label=f"Cluster {i}: R² = {r_value**2:.3f}",
+    )
+
+# Centroids
 plt.scatter(
     kmeans.cluster_centers_[:, 0],
     kmeans.cluster_centers_[:, 1],
     marker="x",
     s=200,
     linewidths=3,
-    color="r",
+    color="black",
     label="Centroids",
 )
-plt.title("Coffee Chain Sales Clustering Results")
+
+plt.title("Coffee Chain Sales Clustering Results with Regression Analysis")
 plt.xlabel("Marketing")
 plt.ylabel("Sales")
-plt.legend(*scatter.legend_elements(), title="Clusters")
+plt.legend(bbox_to_anchor=(1.05, 1))
 plt.grid(True)
+plt.tight_layout()
 plt.show()
 
 # Boxplot
