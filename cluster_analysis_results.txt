@@ -1,0 +1,19 @@
+Cluster Analysis Results
+================================================================================
+
+Cluster Sizes:
+Cluster
+0    550
+1    278
+2    126
+3    108
+Name: count, dtype: int64
+
+Cluster Summary Statistics:
+          Sales                   Marketing                
+           mean     std  min  max      mean    std min  max
+Cluster                                                    
+0        100.41   34.61   23  178     12.75   5.91   0   36
+1        252.29   70.97  124  543     31.12   7.50  21   50
+2        146.89   59.59   21  289     63.00  23.78  39  122
+3        546.54  113.30  298  815     80.70  17.08  57  122
